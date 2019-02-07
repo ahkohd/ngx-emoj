@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-emoj": [
+        "dist/ngx-emoj"
+      ],
+      "ngx-emoj/*": [
+        "dist/ngx-emoj/*"
+      ]
+    }
   }
 }

@@ -133,6 +133,41 @@
           }
         }
       }
+    },
+    "ngx-emoj": {
+      "root": "projects/ngx-emoj",
+      "sourceRoot": "projects/ngx-emoj/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-emoj/tsconfig.lib.json",
+            "project": "projects/ngx-emoj/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-emoj/src/test.ts",
+            "tsConfig": "projects/ngx-emoj/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-emoj/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-emoj/tsconfig.lib.json",
+              "projects/ngx-emoj/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-emoji"
