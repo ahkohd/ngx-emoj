@@ -4,15 +4,18 @@ A simple, theme-able emoji mart/picker for angular 4+
 
 ## Demo
 ![ngx-emoji been used in a Ionic3 project](https://i.imgur.com/l73IfUG.gif)
-Also see a demo [on StackBlitz.com](https://ngx-emoj.stackblitz.io/)
+
+### Theme Creator
+Also see a demo at the [project's home page](https://ahkohd.github.io/ngx-emoj). You can use the theme creator to style up a new theme.
 
 ## Features
  - No use of external dependencies, implemented with Angular APIs.
  - Fully themeable with ease.
  - A light-weight library, does not load any stylesheets or images.
-  - Uses Unicode emoji chars, which makes emoji look and feels native.
+- Uses Unicode emoji chars, which makes emoji look and feels native.
  - Flexible Interfaces to theme the looks of the emoji mart.
  - Mobile ready, supports touch interactions, like swipe.
+ - You can easily create themes with the theme creator at the [project's home page](https://ahkohd.github.io/ngx-emoj)
  - Persistently saves recently used emojis using `window.localStorage`
  -  Works with **Ng2** to **Ng7** projects and as well as **Ionic 3/4**.
 
@@ -128,7 +131,8 @@ handleCharDelete(e)  {
  ```
 
 ## Theming
- **ngx-emoj** can be themed using `[theme]` and passing in an object implementing the **Theme Interface**
+ **ngx-emoj** can be themed using `[theme]` and passing in an object implementing the **Theme Interface**. Also you can easily theme with  the creator at the [project's home page](https://ahkohd.github.io/ngx-emoj)
+
 ```html
 <ngx-emoj
 	...

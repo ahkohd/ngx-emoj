@@ -1,4 +1,16 @@
-import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, Renderer2, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  ViewChild,
+  Renderer2,
+  AfterViewInit
+} from '@angular/core';
+import {
+  EMOJIS
+} from '../misc/emojis.data';
 
 @Component({
   selector: 'ngx-emoj-category-content',
@@ -88,45 +100,49 @@ export class NgxEmojCategoryContentComponent implements AfterViewInit {
   @Input() emojiFontSize: string;
   @Output() oncontentscroll: any = new EventEmitter;
   @Output() oncontentSwipe: any = new EventEmitter;
-  @Input() recentEmojiDB: any;
   @Input() searchEmojiPlaceholderText: string;
   @Input() searchBoxStyle: any;
   @Input() emojiNotFoundText: string;
   @Input() martEmojiNotFoundFG: string;
 
-  doneInitial: boolean;
   notFound: boolean;
+  initialEmoj: boolean;
 
   @ViewChild('emojiContainer') emojiContainer: ElementRef;
   // @ViewChild('swipePane') swipePane: ElementRef;
 
-  initialSearch: any = [];
+  searchSet: any = [];
+  recentEmosForSearch: any = [];
 
   constructor(private rd: Renderer2) {
-
-    this.doneInitial = false;
+    this.initialEmoj = false;
     this.notFound = false;
   }
 
+
   search(e) {
 
-
-    if (!this.doneInitial) {
-      this.initialSearch = this.categoryEmojiSet;
-      this.doneInitial = true;
+    if (!this.initialEmoj) {
+      // save the recent emojs
+      this.recentEmosForSearch = this.categoryEmojiSet;
+      let searchSet = [];
+      for (let i = 2; i < EMOJIS.length; i++) {
+        searchSet = searchSet.concat(EMOJIS[i].emojis);
+      }
+      this.searchSet = searchSet;
+      this.initialEmoj = true;
     }
-
     const query = e.target.value.toLowerCase();
 
     if (query && query.trim() !== '') {
-      this.categoryEmojiSet =  this.initialSearch.filter( item => {
+      this.categoryEmojiSet = this.searchSet.filter(item => {
         if (item[1].toLowerCase().indexOf(query) > -1) {
-            return item;
+          return item;
         }
       });
 
     } else {
-      this.categoryEmojiSet = this.initialSearch;
+      this.categoryEmojiSet = this.recentEmosForSearch;
     }
     if (this.categoryEmojiSet.length === 0) {
       this.notFound = true;
@@ -135,59 +151,64 @@ export class NgxEmojCategoryContentComponent implements AfterViewInit {
     }
   }
 
+
   ngAfterViewInit() {
 
     // listen for scroll event
     this.rd.listen(this.emojiContainer.nativeElement, 'scroll', (e) => {
-        this.oncontentscroll.emit({scrollTop: this.emojiContainer.nativeElement.scrollTop,
-           scrollHeight: this.emojiContainer.nativeElement.scrollHeight});
+      this.oncontentscroll.emit({
+        scrollTop: this.emojiContainer.nativeElement.scrollTop,
+        scrollHeight: this.emojiContainer.nativeElement.scrollHeight
       });
+    });
 
-      // handle swipe...
+    // handle swipe...
 
-      this.swipedetect(this.emojiContainer.nativeElement, (swipedir) => {
+    this.swipedetect(this.emojiContainer.nativeElement, (swipedir) => {
 
-        if (swipedir === 'left' || swipedir === 'right') {
-          this.oncontentSwipe.emit({direction: swipedir});
-        }
-      });
+      if (swipedir === 'left' || swipedir === 'right') {
+        this.oncontentSwipe.emit({
+          direction: swipedir
+        });
+      }
+    });
   }
 
   swipedetect(el, callback) {
 
     const touchsurface = el;
     let swipedir,
-    startX,
-    startY,
-    dist,
-    distX,
-    distY;
+      startX,
+      startY,
+      dist,
+      distX,
+      distY;
     const threshold = 150; // required min distance traveled to be considered swipe
     const restraint = 100; // maximum distance allowed at the same time in perpendicular direction
     const allowedTime = 300; // maximum time allowed to travel that distance
     let elapsedTime,
-    startTime;
+      startTime;
     const handleswipe = callback;
 
     this.rd.listen(touchsurface, 'touchstart', (e) => {
       const touchobj = e.changedTouches[0];
-        swipedir = 'none';
-        dist = 0;
-        startX = touchobj.pageX;
-        startY = touchobj.pageY;
-        startTime = new Date().getTime();
-         // record time when finger first makes contact with surface
+      swipedir = 'none';
+      dist = 0;
+      startX = touchobj.pageX;
+      startY = touchobj.pageY;
+      startTime = new Date().getTime();
+      // record time when finger first makes contact with surface
 
-         // Uncommented this to enale scroll in div
-         // e.preventDefault();
+      // Uncommented this to enale scroll in div
+      // e.preventDefault();
 
     });
 
 
     // Uncommented this to enale scroll in div
     // this.rd.listen(touchsurface, 'touchmove', (e) => {
-      // prevent scrolling when inside DIV
-      // e.preventDefault();
+    // prevent scrolling when inside DIV
+    // e.preventDefault();
     // });
 
     this.rd.listen(touchsurface, 'touchend', (e) => {
@@ -197,13 +218,13 @@ export class NgxEmojCategoryContentComponent implements AfterViewInit {
       elapsedTime = new Date().getTime() - startTime; // get time elapsed
       if (elapsedTime <= allowedTime) { // first condition for awipe met
         if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) { // 2nd condition for horizontal swipe met
-            swipedir = (distX < 0) ? 'left' : 'right'; // if dist traveled is negative, it indicates left swipe
+          swipedir = (distX < 0) ? 'left' : 'right'; // if dist traveled is negative, it indicates left swipe
         } else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint) { // 2nd condition for vertical swipe met
-            swipedir = (distY < 0) ? 'up' : 'down'; // if dist traveled is negative, it indicates up swipe
+          swipedir = (distY < 0) ? 'up' : 'down'; // if dist traveled is negative, it indicates up swipe
         }
       }
       handleswipe(swipedir);
-        // Uncommented this to enale scroll in div
+      // Uncommented this to enale scroll in div
       // e.preventDefault();
     });
 
@@ -211,7 +232,9 @@ export class NgxEmojCategoryContentComponent implements AfterViewInit {
 
 
   pickEmoji(emoji) {
-    this.onpickemoji.emit({emoji: emoji});
+    this.onpickemoji.emit({
+      emoji: emoji
+    });
   }
 
 

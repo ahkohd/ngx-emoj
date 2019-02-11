@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Theme Code</h1>
+<div mat-dialog-content>
+<p class="code-label">
+    Copy and paste the code below into <span> [theme]="..." </span> input of the <span>ngx-emoj</span> component.
+    </p>
+
+  <textarea class="code-area" #inputTarget spellcheck="false" autocomplete="off">
+      {{ data.code }}
+  </textarea>
+</div>
+<div mat-dialog-actions>
+  <button mat-button  [ngxClipboard]="inputTarget" (cbOnSuccess) = "copied()">Copy To Clipboard</button>
+  <button mat-button  cxzcdkFocusInitial [mat-dialog-close]>Ok</button>
+</div>

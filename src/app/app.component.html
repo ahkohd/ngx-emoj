@@ -1,29 +1,221 @@
-<div>
+<app-header [text]="text"></app-header>
+<div class="container">
+
+    <div class="left">
 
 
-  <h1>Pick an Emoji: {{ text }}</h1>
-  <ngx-emoj
-  (onemojipick)="handleEmoji($event)"
-  (onchardelete)="handleCharDelete($event)"
-  [width]="'100%'"
-  [height]="'50vh'"
-  [theme]="{
-    martShowHeader: true,
-    martShowFooter: true,
-    martHeaderPadding: {x: '0', y: '0'},
-    martFooterPadding: {x: '0', y: '0'},
-    martHeaderFontSize: '14px',
-    martHeaderBG: '#e3e7e8',
-    martFooterBG: '#e3e7e8',
-    martBG: '#ebeff2',
-    martCategoryColor: '#94a0a6',
-    martCategoryColorActive: '#455a64',
-    martActiveCategoryIndicatorColor: '#00897b',
-    martEmojiFontSize: '150%',
-    martCategoryFontSize: '20px',
-    martBorderRadius: '5px',
-    martActiveCategoryIndicatorHeight: '4px',
-    martEmojiPadding: {x: '40px', y: '40px'}
-  }">
-  </ngx-emoj>
+        <div class="table" [ngStyle]="{'border-radius': martBorderRadius+'px'}">
+            <ngx-emoj 
+            (onemojipick)="handleEmoji($event)"
+            (onchardelete)="handleCharDelete($event)"
+            [width]="'342px'"
+            [height]="'334px'"
+            [theme]="{
+              martShowHeader: showHeader,
+              martShowFooter: showFooter,
+              martHeaderPadding: {x: x1+'px', y: y1+'px'},
+              martFooterPadding: {x: x2+'px', y: y2+'px'},
+              martHeaderBG: martHeaderBG,
+              martFooterBG: martFooterBG,
+              martBG: martBGcolor,
+              martCategoryColor: martCategoryColor,
+              martCategoryColorActive:  martCategoryColorActive,
+              martActiveCategoryIndicatorColor: martActiveCategoryIndicatorColor,
+              martEmojiFontSize: martEmojiFontSize+'%',
+              martCategoryFontSize: martCategoryFontSize+'px',
+              martBorderRadius: martBorderRadius+'px',
+              martActiveCategoryIndicatorHeight: martActiveCategoryIndicatorHeight+'px',
+              martEmojiPadding: {x: x3+'px', y: y3+'px'}
+            }">
+            </ngx-emoj>
+
+            <div class="author-note">Made with <span>❤️</span> by <a href="http://github.com/ahkohd">@ahkohd</a> </div>
+
+
+            
+
+
+        </div>
+    </div>
+
+    <div class="right">
+            <div class="r-content">
+
+              <div class="section">
+                  <h1>Install</h1>
+                  <div class="code">
+                    $ npm i ngx-emoj --save
+                  </div>
+
+              </div>
+
+
+              <div class="section">
+                  <h1>Customize</h1>
+
+                  <input class="color" placeholder="Content BG" [(colorPicker)]="martBGcolor" [style.background]="martBGcolor"    [cpPosition]="'top'"
+      [cpPositionOffset]="'20%'"
+      [cpPositionRelativeToArrow]="true" />
+                  <input class="color" placeholder="Header BG"  [(colorPicker)]="martHeaderBG" [style.background]="martHeaderBG"   [cpPosition]="'top'"
+      [cpPositionOffset]="'20%'"
+      [cpPositionRelativeToArrow]="true" />
+                  <input class="color" placeholder="Footer BG"  [(colorPicker)]="martFooterBG" [style.background]="martFooterBG"   [cpPosition]="'top'"
+      [cpPositionOffset]="'20%'"
+      [cpPositionRelativeToArrow]="true" />
+                  <input class="color" placeholder="Footer BG"  [(colorPicker)]="martFooterBG" [style.background]="martFooterBG"   [cpPosition]="'top'"
+      [cpPositionOffset]="'20%'"
+      [cpPositionRelativeToArrow]="true" />
+                  <input class="color" placeholder="Category Indicator Color"  [(colorPicker)]="martActiveCategoryIndicatorColor" [style.background]="martActiveCategoryIndicatorColor"   [cpPosition]="'top'"
+      [cpPositionOffset]="'20%'"
+      [cpPositionRelativeToArrow]="true" />
+                  <input class="color" placeholder="Category Icon Color"  [(colorPicker)]="martCategoryColor" [style.background]="martCategoryColor"   [cpPosition]="'top'"
+      [cpPositionOffset]="'20%'"
+      [cpPositionRelativeToArrow]="true" />
+                  <input class="color" placeholder="Active Category Icon Color"  [(colorPicker)]="martCategoryColorActive" [style.background]="martCategoryColorActive"   [cpPosition]="'top'"
+      [cpPositionOffset]="'20%'"
+      [cpPositionRelativeToArrow]="true" />
+
+
+              </div>
+
+             <div class="control-block">
+                <b>Show Header</b>
+              <mat-checkbox class="example-margin" [(ngModel)]="showHeader"></mat-checkbox>
+             </div>
+
+             <br>
+             <div class="control-block">
+
+              <b>Show Footer</b>
+              <mat-checkbox class="example-margin" [(ngModel)]="showFooter"></mat-checkbox>
+            </div>
+
+            <br>
+
+
+            <div class="control-block">
+                  <b>Mart Border Radius </b>
+                  <mat-slider
+                    [max]="40"
+                    [min]="0"
+                    [(ngModel)]="martBorderRadius">
+                </mat-slider>
+            </div>
+            <div class="control-block">
+                <b>Indicator Height </b>
+                <mat-slider
+                  [max]="10"
+                  [min]="0"
+                  [(ngModel)]="martActiveCategoryIndicatorHeight">
+              </mat-slider>
+          </div>
+          <div class="control-block">
+                <b>Category Icon Size </b>
+                <mat-slider
+                  [max]="100"
+                  [min]="0"
+                  [(ngModel)]="martCategoryFontSize">
+              </mat-slider>
+          </div>
+          <div class="control-block">
+              <b>Emoji Size </b>
+              <mat-slider
+                [max]="300"
+                [min]="0"
+                [(ngModel)]="martEmojiFontSize">
+            </mat-slider>
+            <br>
+            <small>NOTE: Set Emoji Character Container Padding also to avoid cliping. </small>
+        </div>
+        <br>
+        <br>
+
+          <p class="control-inline">
+              <mat-form-field color="accent">
+                <mat-label>Mart Header Padding X</mat-label>
+                    <input matInput [(ngModel)]="x1" placeholder="Placeholder">
+              </mat-form-field>
+            </p>
+            <p class="control-inline">
+                <mat-form-field color="accent">
+                  <mat-label>Mart Header Padding Y</mat-label>
+                      <input matInput [(ngModel)]="y1" placeholder="Placeholder">
+                </mat-form-field>
+              </p>
+
+              <p class="control-inline">
+                  <mat-form-field color="accent">
+                    <mat-label>Mart Footer Padding X</mat-label>
+                        <input matInput [(ngModel)]="x2" placeholder="Placeholder">
+                  </mat-form-field>
+                </p>
+
+                <p class="control-inline">
+                    <mat-form-field color="accent">
+                      <mat-label>Mart Footer Padding Y</mat-label>
+                          <input matInput  [(ngModel)]="y2" placeholder="Placeholder">
+                    </mat-form-field>
+                  </p>
+
+
+                  <p class="control-inline">
+                      <mat-form-field color="accent">
+                        <mat-label>Emoji Character Container Padding X</mat-label>
+                            <input matInput [(ngModel)]="x3" placeholder="Placeholder">
+                      </mat-form-field>
+                    </p>
+
+                    <p class="control-inline">
+                        <mat-form-field color="accent">
+                          <mat-label>Emoji Character Container Padding Y</mat-label>
+                              <input matInput [(ngModel)]="y3" placeholder="Placeholder">
+                        </mat-form-field>
+                      </p>
+
+            <br>
+
+
+              <button mat-raised-button color="accent" (click)="openDialog()">Use Style</button>
+
+              <div class="author-note2">Made with <span>❤️</span> by <a href="http://github.com/ahkohd">@ahkohd</a> </div>
+
+
+              </div>
+
+              <div class="logo-emo">
+                  <div class="emoji  emoji--yay">
+                      <div class="emoji__face">
+                        <div class="emoji__eyebrows"></div>
+                        <div class="emoji__mouth"></div>
+                      </div>
+                    </div>
+                  <div class="emoji  emoji--haha">
+                      <div class="emoji__face">
+                        <div class="emoji__eyes"></div>
+                        <div class="emoji__mouth">
+                          <div class="emoji__tongue"></div>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="emoji  emoji--wow">
+                      <div class="emoji__face">
+                        <div class="emoji__eyebrows"></div>
+                        <div class="emoji__eyes"></div>
+                        <div class="emoji__mouth"></div>
+                      </div>
+                    </div>
+              </div>
+
+
+            </div>
+
+
+
+
 </div>
+
+
+
+
+
+

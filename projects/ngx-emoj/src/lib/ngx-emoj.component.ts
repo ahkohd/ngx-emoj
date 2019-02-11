@@ -38,7 +38,6 @@ import { EMOS } from './misc/emos.data';
       [categoryName]="activeCategory"
       [categoryEmojiSet]="activeEmojiSet"
       [activeIndex]="activeIndex"
-      [recentEmojiDB]="emojiDB"
       [martEmojiNotFoundFG]="(theme.martEmojiNotFoundFG || DEFAULTS.martEmojiNotFoundFG)"
       [emojiNotFoundText]="(emojiNotFoundText || DEFAULTS.emojiNotFoundText)"
       [searchBoxStyle]="(theme.martSearchBoxStyle || DEFAULTS.martSearchBoxStyle)"
@@ -166,14 +165,9 @@ export class NgxEmojComponent implements OnInit {
         // If recent category, set emoji to emojis in the recent store...
         this.activeIndex = EMOJIS[1].id;
         this.activeEmojiSet = this.emojiDB;
-
       } else if (e.name === 'Search') {
           this.activeIndex = EMOJIS[0].id;
-          let searchSet = [];
-          for (let i = 2; i < EMOJIS.length; i++) {
-            searchSet =  searchSet.concat(EMOJIS[i].emojis);
-          }
-          this.activeEmojiSet = searchSet;
+          this.activeEmojiSet = this.emojiDB.concat(EMOJIS[2].emojis);
       } else {
                // filter to set current emoji set...
             this.activeEmojiSet = EMOJIS.filter((category) => {
@@ -263,12 +257,7 @@ export class NgxEmojComponent implements OnInit {
           // search
           this.activeIndex = EMOJIS[0].id;
           this.activeCategory = EMOJIS[0].name;
-
-          let searchSet = [];
-          for (let i = 2; i < EMOJIS.length; i++) {
-            searchSet =  searchSet.concat(EMOJIS[i].emojis);
-          }
-          this.activeEmojiSet = searchSet;
+          this.activeEmojiSet = this.emojiDB.concat(EMOJIS[2].emojis);
         } else if (prev === 1 ) {
           // recent
           this.activeIndex = EMOJIS[1].id;
@@ -292,11 +281,7 @@ export class NgxEmojComponent implements OnInit {
           // search
           this.activeIndex = EMOJIS[0].id;
           this.activeCategory = EMOJIS[0].name;
-          let searchSet = [];
-          for (let i = 2; i < EMOJIS.length; i++) {
-            searchSet =  searchSet.concat(EMOJIS[i].emojis);
-          }
-          this.activeEmojiSet = searchSet;
+          this.activeEmojiSet = this.emojiDB.concat(EMOJIS[2].emojis);
         } else if (next === 1 ) {
           // recent
           this.activeIndex = EMOJIS[1].id;
