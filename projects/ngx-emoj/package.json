@@ -8,16 +8,28 @@
   "scripts": {},
   "version": "0.0.7",
   "description": "A simple, theme-able emoji mart/picker for angular 4+",
-  "keywords": ["ngx", "emoji", "mart", "picker", "angular", "angular4", "ionic3", "angular7"],
+  "keywords": [
+    "ngx",
+    "emoji",
+    "mart",
+    "picker",
+    "angular",
+    "angular4",
+    "ionic3",
+    "angular7"
+  ],
   "homepage": "https://ahkohd.github.io/ngx-emoj",
   "repository": {
-  "type" : "git",
-  "url" : "https://github.com/ahkohd/ngx-emoj.git"
-},
+    "type": "git",
+    "url": "https://github.com/ahkohd/ngx-emoj.git"
+  },
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "if-emoji": "^0.1.0",
+    "twemoji": "^13.0.2"
+  }
 }
