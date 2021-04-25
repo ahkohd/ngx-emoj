@@ -6,7 +6,8 @@ import { NgxEmojComponent } from './ngx-emoj.component';
 import { NgxEmojHeaderComponent } from './components/header.component';
 import { NgxEmojFooterComponent } from './components/footer.component';
 import { NgxEmojCategoryComponent } from './components/category.component';
-import {NgxEmojCategoryContentComponent } from './components/category-content.component';
+import { NgxEmojCategoryContentComponent } from './components/category-content.component';
+import { NgxEmojFallbackPipe } from './pipes/ngx-emoj-fallback.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {NgxEmojCategoryContentComponent } from './components/category-content.co
     NgxEmojHeaderComponent,
     NgxEmojCategoryComponent,
     NgxEmojCategoryContentComponent,
-    NgxEmojFooterComponent
+    NgxEmojFooterComponent,
+    NgxEmojFallbackPipe,
   ],
   imports: [
     CommonModule
@@ -23,8 +25,10 @@ import {NgxEmojCategoryContentComponent } from './components/category-content.co
     NgxEmojHeaderComponent,
     NgxEmojCategoryComponent,
     NgxEmojCategoryContentComponent,
-    NgxEmojFooterComponent],
-    providers: [],
-    entryComponents: [NgxEmojComponent]
+    NgxEmojFooterComponent,
+    NgxEmojFallbackPipe,
+  ],
+  providers: [],
+  entryComponents: [NgxEmojComponent]
 })
 export class NgxEmojModule { }

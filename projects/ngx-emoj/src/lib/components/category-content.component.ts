@@ -31,7 +31,7 @@ import {
                                            #emojiContainer>
 
       <div class="emoji-btn-container"
-        *ngFor="let emo of categoryEmojiSet" [ngStyle]="{'height': emojiBtnPadding.y,
+        *ngFor="let emo of categoryEmojiSet | ngxEmojFallback" [ngStyle]="{'height': emojiBtnPadding.y,
                                                          'width': emojiBtnPadding.x   }">
           <button (click)="pickEmoji(emo)" class="ngx-emoji-emoj-btn"
           [ngStyle]="{'font-size': emojiFontSize}">
